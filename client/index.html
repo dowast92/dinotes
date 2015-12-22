@@ -18,19 +18,6 @@
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="#">Link</a></li>
-                <p>
-                    <input type="checkbox" class="filled-in" id="testbox1"/>
-                    <label for="testbox1">Add node modules to .gitignore!!! </label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="filled-in-box"/>
-                    <label for="filled-in-box">sudo apt-get purge emacs</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="check3"/>
-                    <label for="check3">alias emacs='vim'</label>
-                </p>
-
             </ul>
         </div>
     </nav>
@@ -55,7 +42,7 @@
                                         <div class="collapsible-header">
                                             <h5>Document a New Specimen</h5>
                                             <div class="input-field">
-                                                 <input class="speciman-card-input"<input placeholder="Tyrannosaurus rex" type="text" id="speciman-caspeciman-name">
+                                                 <input class="speciman-card-input"<input placeholder="Tyrannosaurus rex" type="text" id="speciman-card-speciman-name">
                                             </div>
                                         </div>
                                         <div class="row doc-new-spec collapsible-body">
@@ -68,18 +55,18 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="input-field col s6">
-                                                        <input class="speciman-card-input" id="speciman-card-latitude" type="text">
+                                                        <input class="speciman-card-input" id="speciman-card-latitude" type="number">
                                                         <label for="">Latitude</label>
                                                     </div>
                                                     <div class="input-field col s6">
-                                                        <input class="speciman-card-input" id="speciman-card-longitude" type="text">
+                                                        <input class="speciman-card-input" id="speciman-card-longitude" type="number">
                                                         <label for="">Longitude</label>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="input-field col s6">
-                                                        <input class="speciman-card-input" id="speciman-card-date-collected" type="text">
-                                                        <label for="">Date Collected</label>
+                                                        <input class="speciman-card-input" id="speciman-card-date-collected" type="date">
+                                                        <!-- <label for="">Date Collected</label> -->
                                                     </div>
                                                     <div class="input-field col s6">
                                                         <input class="speciman-card-input" id="speciman-card-collector-name" type="text">
@@ -100,6 +87,13 @@
                                                         <label for="">Notes</label>
                                                     </div>
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input class="img-upload" id="speciman-card-img" type="file" capture="camera" accept"image/*">
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <a class="submit-speciman-card waves-effect waves-light btn light-green darken-4"><i class="material-icons right" id="new-spec-btn">pets</i>Submit</a>
                                                 </div>
@@ -111,6 +105,9 @@
                             </div>
                         </div>
                         -->
+                    </div>
+
+                    <div id="loaded-speciman-cards">
                     </div>
 
                     <div class="row spec-entry">
@@ -180,26 +177,26 @@
             <h5>Checklist</h5>
             <div class="card">
                 <div class="card-content">
-                    <div class="input-field">
-                        <input type="text">
-                        <label for"">New Task</label>
-                    </div>
-                    <form action="#">
+                    <form name="checklist" onsubmit="addNewChecklistItem($('#newItem').val()); return false;">
+                        <div class="input-field">
+                            <input type="text" id="newItem">
+                            <label for"">New Task</label>
+                        </div>
+                        <div id="list">
                             <p>
                                 <input type="checkbox" class="filled-in" id="check1"/>
-                                <label for="check1">Add node modules to .gitignore!!! </label>
-                                <span class="badge">Added 6/7/15 6:00PM</span>
+                                <label for="check1">Set GPS coordinates</label>
+                                <span class="new badge"></span>
                             </p>
                             <p>
                                 <input type="checkbox" class="filled-in" id="check2"/>
-                                <label for="check2">sudo apt-get purge emacs</label>
-                                <span class="new badge">Added 6/7/15 7:00PM</span>
+                                <label for="check2">Double-check medications</label>
                             </p>
                             <p>
                                 <input type="checkbox" class="filled-in" id="check3"/>
-                                <label for="check3">alias emacs='vim'</label>
-                                <span class="new badge">Added 6/7/15 7:00PM</span>
+                                <label for="check3">Restock med kit</label>
                             </p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -207,37 +204,62 @@
 
     </div>
 
+      <!-- Login Modal -->
+      <div id="modal1" class="modal">
+       <div class="modal-content">
+          <h4>Register</h4>
+          <input type="text" class="dino-reg-login-input" id="user"/>
+          <label for="dino-username">username</label>
+          <input type="text" class="dino-reg-login-input" id="pass"/>
+          <label for="dino-password">password</label>
+
+       </div>
+       <div class="modal-footer">
+          <a href="#!" class="dino-reg-login modal-action modal-close waves-effect waves-green btn-flat">Register & Login</a>
+       </div>
+      </div>
+
     <!--  For Electron -->
-    <script>
+    <!-- <script>
       window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
       window.Hammer = require('./bower_components/Materialize/js/hammer.min.js');
-    </script>
+    </script> -->
     <!--  For Normal Broswers -->
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
+    <script src="bower_components/mustache.js/mustache.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/server-speak.js"></script>
 
     <script type="text/javascript">
+
+        var checklistI = 4;
+
+        function addNewChecklistItem(item) {
+            $( "#list" ).prepend( "<p><input type='checkbox' class='filled-in' id='check" + checklistI + "'/><label for='check" + checklistI + "'>" + item + "</label><span class='new badge'></span></p>");
+            checklistI++;
+        }
+
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: -34.397, lng: 150.644},
-                    zoom: 8
+                zoom: 8,
+                center: {lat: 42.5900, lng: 103.4300},
+                mapTypeId: google.maps.MapTypeId.SATELLITE
                 });
             // Resize stuff...
             google.maps.event.addDomListener(window, "resize", function() {
                 var center = map.getCenter();
                 google.maps.event.trigger(map, "resize");
-                map.setCenter(center); 
+                map.setCenter(center);
             });
         }
         function hideChecklist() {
             document.getElementById('checklist').style.display = 'none';
         }
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8DUBiYakpmrqJftxrxNF3gtM_WtRy0OQ&callback=initMap">
     </script>
 </body>
 </html>
